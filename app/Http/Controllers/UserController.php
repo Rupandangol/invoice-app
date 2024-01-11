@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users=User::latest('id')->paginate();
+        $users=User::latest('id')->simplePaginate();
         return view('user.index',['users'=>$users]);
     }
 
@@ -58,9 +58,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, string $id)
     {
         $user=User::findOrFail($id);
-        $data=$request->all();
-        $data['is_admin']=(int)($request->is_admin);
-        $user->update($data);
+        $user->update($request->all());
         return redirect(route('users.index'))->with('success','Successfully Updated');
     }
 
