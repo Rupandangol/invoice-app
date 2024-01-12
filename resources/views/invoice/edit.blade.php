@@ -7,6 +7,7 @@
         <h2>Users</h2>
       </div>
       @include('components.sfAlerts')
+
           <h4 class="mb-3">Edit User</h4>
           <form method="post" action="{{route('users.update',$user->id)}}" >
             @csrf

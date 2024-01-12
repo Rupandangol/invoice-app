@@ -14,8 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users=User::latest('id')->paginate();
-        return view('user.index',['users'=>$users]);
+        $users=User::latest('id')->simplePaginate();
+        return view('user.index',['users'=>$users,'sidebarUsers'=>'active']);
     }
 
     /**
@@ -49,7 +49,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user=User::findOrFail($id);
-        return view('user.edit',['user'=>$user]);
+        return view('user.edit',['user'=>$user,'sidebarUsers'=>'active']);
     }
 
     /**
@@ -58,9 +58,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, string $id)
     {
         $user=User::findOrFail($id);
-        $data=$request->all();
-        $data['is_admin']=(int)($request->is_admin);
-        $user->update($data);
+        $user->update($request->all());
         return redirect(route('users.index'))->with('success','Successfully Updated');
     }
 
