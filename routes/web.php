@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,4 @@ Route::get('/', function () {
 Route::resource('/users',UserController::class);
 Route::resource('/invoices',InvoiceController::class);
 Route::get('/invoices/download/{id}',[InvoiceController::class,'download'])->name('invoices.download');
+Route::resource('/settings',SettingController::class);

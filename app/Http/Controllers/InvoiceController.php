@@ -17,7 +17,7 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices=Invoice::simplePaginate();
-        return view('invoice.index',['invoices'=>$invoices]);
+        return view('invoice.index',['invoices'=>$invoices,'sidebarInvoices'=>'active']);
     }
 
     /**
@@ -45,7 +45,7 @@ class InvoiceController extends Controller
         
         $invoice['data']=$this->totalCalculator($invoice->invoiceItem);
 
-        return view('invoice.show',['invoice'=>$invoice]);
+        return view('invoice.show',['invoice'=>$invoice,'sidebarInvoices'=>'active']);
     }
 
     /**
@@ -67,9 +67,10 @@ class InvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Invoice $invoice)
+    public function destroy(string $id)
     {
-        //
+        Invoice::findOrFail($id)->delete();
+        return redirect()->back()->with('success','deleted successfully');
     }
     /**
      * Download Pdf.

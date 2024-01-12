@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $users=User::latest('id')->simplePaginate();
-        return view('user.index',['users'=>$users]);
+        return view('user.index',['users'=>$users,'sidebarUsers'=>'active']);
     }
 
     /**
@@ -49,7 +49,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user=User::findOrFail($id);
-        return view('user.edit',['user'=>$user]);
+        return view('user.edit',['user'=>$user,'sidebarUsers'=>'active']);
     }
 
     /**

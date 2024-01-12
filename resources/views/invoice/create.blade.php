@@ -6,15 +6,8 @@
       <div class="py-5 text-center">
         <h2>Users</h2>
       </div>
-      @if(session('success'))
-      <div class="alert alert-success">
-        {{session('success')}}
-      </div>
-      @endif
-      @if(session('fail'))
-      <div class="alert alert-danger">
-        {{session('fail')}}
-      </div>
+      @include('components.sfAlerts')
+
       @endif
           <h4 class="mb-3">Create User</h4>
           <form method="post" action="{{route('users.store')}}" >

@@ -7,6 +7,7 @@
         <h2>Invoice</h2>
         <a href="{{route('invoices.create')}}" class="btn btn-success">Create Invoice</a>
       </div>
+      @include('components.sfAlerts')
       
       <div class="row">
         <table class="table table-boarded">
@@ -44,7 +45,7 @@
                       <form method="post" action="{{route('invoices.destroy',$item->id)}}">
                         @csrf
                         @method('DELETE')
-                        <button onclick="confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm">Delete</button>
                       </form>
                     </div>
                   </div>

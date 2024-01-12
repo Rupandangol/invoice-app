@@ -8,6 +8,8 @@
         <a class="btn btn-info btn-sm" href="{{route('invoices.index')}}">Back</a>
         <a target="_blank" class="btn btn-success btn-sm" href="{{route('invoices.download',$invoice->id)}}">Download</a>
       </div>
+      @include('components.sfAlerts')
+
       <div class="row">
         <div class="col-md-10">
           <table class="table table-boarded">

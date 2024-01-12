@@ -83,48 +83,16 @@
                     <th>Purchase Amount</th>
                     <th>comsumption Amount</th>
                     <th>Purchase Total</th>
-                    <th>Purchase Total</th>
                     <th>Current billable amount</th>
                 </tr>
                 <tr>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                </tr>
-                <tr>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                </tr>
-                <tr>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                </tr>
-                <tr>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
-                    <td>1231</td>
+                    <td>{{$last_billed_amount??''}}</td>
+                    <td>{{$deposit_amount??''}}</td>
+                    <td>{{($last_billed_amount??0)-($deposit_amount??0)}}</td>
+                    <td>{{$data['sub_total']??''}}</td>
+                    <td>{{$data['taxed_only']??''}}</td>
+                    <td>{{$data['taxed_sub_total']??''}}</td>
+                    <td>{{($data['taxed_sub_total']??0)+(($last_billed_amount??0)-($deposit_amount??0))}}</td>
                 </tr>
             </table>
             <br><br>
@@ -138,26 +106,28 @@
                     <th>Unit Price	</th>
                     <th>Amount</th>
                 </tr>
+                @foreach($invoice_item as $item)
                 <tr>
-                    <td>1973-07-30</td>
-                    <td>559921</td>
-                    <td>tempora</td>
-                    <td>61407</td>
-                    <td>5</td>
-                    <td>2071.00</td>
-                    <td>2071.00</td>
+                    <td>{{$item['document_date']??''}}</td>
+                    <td>{{$item['slip_no']??''}}</td>
+                    <td>{{$item['product_name']??''}}</td>
+                    <td>{{$item['product_number']??''}}</td>
+                    <td>{{$item['quantity']??''}}</td>
+                    <td>{{$item['unit_price']??''}}</td>
+                    <td>{{($item['unit_price']??0)*($item['quantity']??0)}}</td>
                 </tr>
+                @endforeach
                 <tr>
                     <td colspan="6" style="text-align: right">Sub Total</td>
-                    <td>109123</td>
+                    <td>{{$data['sub_total']??''}}</td>
                 </tr>
                 <tr>
-                    <td colspan="6" style="text-align: right">13% vat</td>
-                    <td>109123</td>
+                    <td colspan="6" style="text-align: right">{{config('tax.vat')}}% vat</td>
+                    <td>{{$data['taxed_only']??''}}</td>
                 </tr>
                 <tr>
                     <td colspan="6" style="text-align: right">Grand Total</td>
-                    <td>109123</td>
+                    <td>{{$data['taxed_sub_total']??''}}</td>
                 </tr>
             </table>
         </div>

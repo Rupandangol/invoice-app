@@ -14,9 +14,8 @@ class PdfGeneratorHelper
         $data['data']=$this->totalCalculator($invoice->invoiceItem);
         $data['last_billed_amount']=$invoice->last_billed_amount;
         $data['deposit_amount']=$invoice->last_billed_amount;
-        $data['invoiceItem']=$invoice->invoiceItem;
-        // dd($data);
-        $pdf = Pdf::loadView('pdfTemplate.invoice', ['invoice'=>$data]);
-        return $pdf->stream('invoice.pdf');
+        $data['invoice_item']=$invoice->invoiceItem->toArray();
+        $pdf = Pdf::loadView('pdfTemplate.invoice',$data);
+        return $pdf->download('invoice.pdf');
     }
 }
