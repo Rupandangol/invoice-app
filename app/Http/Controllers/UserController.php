@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users=User::latest('id')->simplePaginate();
+        $users=User::latest('id')->simplePaginate(10);
         return view('user.index',['users'=>$users,'sidebarUsers'=>'active']);
     }
 
