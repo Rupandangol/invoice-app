@@ -1,7 +1,6 @@
 @extends('layout.app')
 
 @section('content')
-<body class="bg-light">
     <div class="container">
       <div class="py-5 text-center">
         <h2>Invoice</h2>

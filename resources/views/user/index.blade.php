@@ -21,9 +21,9 @@
               </tr>            
             </thead>
             <tbody>
-              @foreach($users as $user)
+              @foreach($users as $key=>$user)
               <tr>
-                <td>{{$user->id}}</td>
+                <td>{{++$key}}</td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>
@@ -39,11 +39,13 @@
                        <a href="{{route('users.edit',$user->id)}}" class="btn btn-warning btn-sm">Edit</a>
                     </div>
                     <div class="col-md-2">
+                      @if(Auth::user()->id!=$user->id)
                       <form method="post" action="{{route('users.destroy',$user->id)}}">
                         @csrf
                         @method('DELETE')
                         <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm">Delete</button>
                       </form>
+                      @endif
                     </div>
                   </div>
                 </td>

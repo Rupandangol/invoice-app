@@ -16,7 +16,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices=Invoice::simplePaginate();
+        $invoices=Invoice::simplePaginate(10);
         return view('invoice.index',['invoices'=>$invoices,'sidebarInvoices'=>'active']);
     }
 
