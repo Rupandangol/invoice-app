@@ -1,2 +1,3 @@
+@yield('footer')
 </body>
 </html>

@@ -24,7 +24,6 @@ class InvoiceFactory extends Factory
             'due_date'=>fake()->date(),
             'last_billed_amount'=>fake()->numberBetween(100,1000),
             'deposit_amount'=>fake()->numberBetween(100,1000),
-            'total_amount'=>fake()->numberBetween(100,1000),
             'status'=>fake()->randomElement(['draft','sent','paid'])
         ];
     }

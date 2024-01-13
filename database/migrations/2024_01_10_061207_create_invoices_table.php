@@ -19,7 +19,6 @@ return new class extends Migration
             $table->date('due_date');
             $table->string('last_billed_amount');
             $table->string('deposit_amount');
-            $table->decimal('total_amount', 10, 2);
             $table->enum('status', ['draft', 'sent', 'paid'])->default('draft');
             $table->timestamps();
 

@@ -17,7 +17,6 @@
                 <th>Client Name</th>
                 <th>Invoice Date</th>
                 <th>Due Date</th>
-                <th>Total amount</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>            
@@ -30,8 +29,18 @@
                 <td>{{$item->client_name}}</td>
                 <td>{{$item->invoice_date}}</td>
                 <td>{{$item->due_date}}</td>
-                <td>{{$item->total_amount}}</td>
-                <td>{{$item->status}}</td>
+                <td>
+                  <form action="">
+                    @csrf
+                    @method('PATCH')
+                    <select class="form-select" name="status">
+                      <option @if($item->status=='draft') selected @endif value="draft">Draft</option>
+                      <option @if($item->status=='sent') selected @endif value="sent">Sent</option>
+                      <option @if($item->status=='paid') selected @endif value="paid">Paid</option>
+                    </select>
+                  </form>
+                </td>
+
                 <td>
                   <div class="row">
                     <div class="col-md-3">
