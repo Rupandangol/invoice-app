@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Helper\PdfGeneratorHelper;
+use App\Http\Requests\InvoiceStoreRequest;
+use App\Http\Requests\InvoiceUpdateRequest;
 use App\Models\Invoice;
+use App\Models\InvoiceItem;
 use App\Traits\TotalCalculatorTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceController extends Controller
 {
@@ -25,15 +29,24 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-     //
+        return view('invoice.create',['sidebarInvoices'=>'active']);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(InvoiceStoreRequest $request)
     {
-        //
+        $data=$this->invoiceDatabind($request);
+        $invoice=Invoice::create($data);
+
+        foreach($request->product_name as $key=>$item){
+            $dataItem=$this->invoiceItemDatabind($invoice->id,$request,$key);
+            InvoiceItem::create($dataItem);
+        }
+        return redirect(route('invoices.index'))->with('success','Invoice Created Successfully');
+        
+
     }
 
     /**
@@ -51,17 +64,28 @@ class InvoiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Invoice $invoice)
+    public function edit(string $id)
     {
-        //
+        $invoice=Invoice::with('invoiceItem')->findOrFail($id);
+        return view('invoice.edit',['invoice'=>$invoice,'sidebarInvoices'=>'active']);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Invoice $invoice)
+    public function update(InvoiceUpdateRequest $request, string $id)
     {
-        //
+        $invoice=Invoice::findOrFail($id)->delete();
+        $data=$this->invoiceDatabind($request);
+        $invoice=Invoice::create($data);
+
+        foreach($request->product_name as $key=>$item){
+            $dataItem=$this->invoiceItemDatabind($invoice->id,$request,$key);
+            InvoiceItem::create($dataItem);
+        }
+
+        return redirect(route('invoices.show',$invoice->id))->with('success','Invoice Created Successfully');
+        
     }
 
     /**
@@ -86,4 +110,32 @@ class InvoiceController extends Controller
         return $pdf->stream('invoice.pdf');
     }
 
+    /**
+     *  Invoice Data Bind.
+     */
+    protected function invoiceDatabind($request){
+        $data['user_id']=Auth::user()->id;
+        $data['client_name']=$request->client_name;
+        $data['invoice_date']=$request->invoice_date;
+        $data['due_date']=$request->due_date;
+        $data['last_billed_amount']=$request->last_billed_amount;
+        $data['deposit_amount']=$request->deposit_amount;
+        $data['total_amount']=$request->total_amount;
+        $data['status']=$request->status;
+        return $data;
+    }
+
+    /**
+     * Invoice Item data bind
+     */
+    protected function invoiceItemDatabind($invoiceId,$request,$key){
+        $dataItem['invoice_id']=$invoiceId;
+        $dataItem['product_name']=$request->product_name[$key];
+        $dataItem['product_number']=$request->product_number[$key];
+        $dataItem['slip_no']=$request->slip_no[$key];
+        $dataItem['document_date']=$request->document_date[$key];
+        $dataItem['quantity']=$request->quantity[$key];
+        $dataItem['unit_price']=$request->unit_price[$key];
+        return $dataItem;
+    }
 }

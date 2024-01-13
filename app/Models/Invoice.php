@@ -16,7 +16,6 @@ class Invoice extends Model
         'due_date',
         'last_billed_amount',
         'deposit_amount',
-        'total_amount',
         'status'
     ];
     public function invoiceItem(){
