@@ -11,20 +11,6 @@
             padding:0;
         }
         @font-face {
-            font-family: 'NotoSansJP-Bold';
-            font-style: normal;
-            font-weight: normal;
-            src: url('assets/fonts/NotoSansJP-Bold.ttf') format('truetype');
-            
-        }
-        @font-face {
-            font-family: 'NotoSansJP-regular';
-            font-style: normal;
-            font-weight: normal;
-            src: url('assets/fonts/NotoSansJP-Regular.ttf') format('truetype');
-            
-        }
-        @font-face {
             font-family: 'NotoSansJP';
             font-style: normal;
             font-weight: normal;
@@ -32,7 +18,7 @@
             
         }
         body{
-            font-family: 'NotoSansJP','NotoSansJP-regular','NotoSansJP-Bold','sans serif';
+            font-family: 'NotoSansJP','sans serif';
         }
         #container{
             margin:10px 20px 10px 40px;
@@ -75,7 +61,7 @@
         <br>
         <div class="left">
             <p>{{__("Customer")}} {{__("Number")}}: 01</p>
-            <h3>{{$company['name']??''}}</h3>
+            <p style="font-size: 18px">{{$company['name']??''}}<p>
             <p>{{$company['description']??''}}</p>
             <p>{{__("TEL")}}: {{$company['phone']??''}}</p>
             <p>{{__("FAX")}}: {{$company['fax']??''}}</p>
