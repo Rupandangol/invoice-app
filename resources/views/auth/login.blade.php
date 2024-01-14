@@ -21,20 +21,21 @@
     <div class="row" >
     <div class="col-md-5 offset-3 mt-5" id="login">
         @include('components.sfAlerts')
-            <h1>Invoice App</h1>
-            <h5>Login</h5>
+            <h1>{{__('Invoice')}} {{__('App')}}</h1>
+            <h5>{{__("Login")}}</h5>
+            @include('components.languagesSwitcher')
             <form method="post" action="{{route('login')}}">
                 @csrf
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                   <input type="email" name="email" id="email" class="form-control" />
-                  <label class="form-label" for="email">Email address</label>
+                  <label class="form-label" for="email">{{__("Email")}} {{__("Address")}}</label>
                 </div>
               
                 <!-- Password input -->
                 <div class="form-outline mb-4">
                   <input type="password" name="password" id="password" class="form-control" />
-                  <label class="form-label" for="password">Password</label>
+                  <label class="form-label" for="password">{{__("Password")}}</label>
                 </div>
               
                 <!-- 2 column grid layout for inline styling -->
@@ -43,13 +44,13 @@
                     <!-- Checkbox -->
                     <div class="form-check">
                       <input class="form-check-input" name="remember_me" type="checkbox" id="remember_me" />
-                      <label class="form-check-label" for="remember_me"> Remember me </label>
+                      <label class="form-check-label" for="remember_me"> {{__("Remember me")}} </label>
                     </div>
                   </div>
                 </div>
               
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4">{{__("Sign in")}}</button>
               
                
               </form>

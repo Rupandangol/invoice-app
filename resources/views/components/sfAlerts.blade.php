@@ -1,10 +1,10 @@
 @if(session('success'))
   <div class="alert alert-success">
-    {{session('success')}}
+    {{__(session('success'))}}
   </div>
 @endif
 @if(session('fail'))
 <div class="alert alert-danger">
-  {{session('fail')}}
+  {{__(session('fail'))}}
 </div>
 @endif

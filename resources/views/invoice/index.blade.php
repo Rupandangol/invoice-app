@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
       <div class="py-5 text-center">
-        <h2>Invoice</h2>
-        <a href="{{route('invoices.create')}}" class="btn btn-success">Create Invoice</a>
+        <h2>{{__("Invoice")}}</h2>
+        <a href="{{route('invoices.create')}}" class="btn btn-success">{{__("Create")}} {{__("Invoice")}}</a>
       </div>
       @include('components.sfAlerts')
       
@@ -12,13 +12,13 @@
         <table class="table table-boarded">
             <thead>
               <tr>
-                <th>Sn</th>
-                <th>User Id</th>
-                <th>Client Name</th>
-                <th>Invoice Date</th>
-                <th>Due Date</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>{{__("Id")}}</th>
+                <th>{{__("User")}} {{__("Id")}}</th>
+                <th>{{__("Client Name")}}</th>
+                <th>{{__("Invoice Date")}}</th>
+                <th>{{__("Due Date")}}</th>
+                <th>{{__("Status")}}</th>
+                <th>{{__("Action")}}</th>
               </tr>            
             </thead>
             <tbody>
@@ -34,9 +34,9 @@
                     @csrf
                     @method('PATCH')
                     <select class="form-select" name="status">
-                      <option @if($item->status=='draft') selected @endif value="draft">Draft</option>
-                      <option @if($item->status=='sent') selected @endif value="sent">Sent</option>
-                      <option @if($item->status=='paid') selected @endif value="paid">Paid</option>
+                      <option @if($item->status=='draft') selected @endif value="draft">{{__("Draft")}}</option>
+                      <option @if($item->status=='sent') selected @endif value="sent">{{__("Sent")}}</option>
+                      <option @if($item->status=='paid') selected @endif value="paid">{{__("Paid")}}</option>
                     </select>
                   </form>
                 </td>
@@ -44,16 +44,16 @@
                 <td>
                   <div class="row">
                     <div class="col-md-3">
-                       <a href="{{route('invoices.show',$item->id)}}" class="btn btn-info btn-sm">Details</a>
+                       <a href="{{route('invoices.show',$item->id)}}" class="btn btn-info btn-sm">{{__("Details")}}</a>
                     </div>
                     <div class="col-md-2">
-                       <a href="{{route('invoices.edit',$item->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                       <a href="{{route('invoices.edit',$item->id)}}" class="btn btn-warning btn-sm">{{__("Edit")}}</a>
                     </div>
                     <div class="col-md-2">
                       <form method="post" action="{{route('invoices.destroy',$item->id)}}">
                         @csrf
                         @method('DELETE')
-                        <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm">{{__("Delete")}}</button>
                       </form>
                     </div>
                   </div>

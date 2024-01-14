@@ -10,6 +10,16 @@
             margin:0;
             padding:0;
         }
+        @font-face {
+            font-family: 'NotoSansJP';
+            font-style: normal;
+            font-weight: normal;
+            src: url('assets/fonts/NotoSansJP-VariableFont_wght.ttf') format('truetype');
+            
+        }
+        body{
+            font-family: 'NotoSansJP','sans serif';
+        }
         #container{
             margin:10px 20px 10px 40px;
             padding:2px;
@@ -17,6 +27,8 @@
         #title{
             text-align: center;
             border: 1px solid black;
+            font-size: 30px;
+            margin-bottom: 5px;
         }
         .left{
             float: left;
@@ -45,27 +57,26 @@
 </head>
 <body>
     <div id="container">
-        <h1 id="title">Invoice</h1>
+        <p id="title">{{__("Invoice")}}
         <br>
         <div class="left">
-            <p>Customer Number:01</p>
-            <h3>MBN Store</h3>
-            <p>We are a zero soft company that supports small and meduim sized business</p>
-            <p>TEL: 129831298</p>
-            <p>FAX: 2312312</p>
+            <p>{{__("Customer")}} {{__("Number")}}: 01</p>
+            <p style="font-size: 18px">{{$company['name']??''}}<p>
+            <p>{{$company['description']??''}}</p>
+            <p>{{__("TEL")}}: {{$company['phone']??''}}</p>
+            <p>{{__("FAX")}}: {{$company['fax']??''}}</p>
             <br><br>
-            <p>Thank you for your continued support.</p>
-            <p>Please make a request as below</p>
+            <p>{{__("Thank you for your continued support.")}}</p>
+            <p>{{__("Please make a request as below")}}</p>
         </div>
-        <div class="right" style="text-align: right">
-            <p>Deadline: July 31,2023</p>
-            <p>MBN Trading Co. Ltd. 530-123,</p>
-            <p>Balaju, banasthali, kathmandu</p>
-            <p>TEL: 129831298(representative)</p>
-            <p>Name: MBN Shokuji</p>
-            <p>Registration Number: 12312312</p>
+        <div class="right" style="text-align: right;">
+            <p>{{__("Deadline")}}: {{$due_date??''}}</p>
+            <p>{{$company['name']??''}} Co. Ltd. 530-123,</p>
+            <p>{{$company['location']??''}}</p>
+            <p>{{__("TEL")}}: {{$company['phone']}}({{__("representative")}})</p>
+            <p>{{__("Registration")}} {{__("Number")}}: {{$company['registration_number']??''}}</p>
             <br><br>
-            <table style="width: 200px">
+            <table style="width: 200px;margin-left:170px">
                 <tr>
                     <td style="height: 60px"></td>
                     <td></td>
@@ -77,13 +88,13 @@
         <div id="tables" style="margin-top: 10px">
             <table>
                 <tr>
-                    <th>Last Billed Amount</th>
-                    <th>Deposit Amount</th>
-                    <th>Carryover Amount</th>
-                    <th>Purchase Amount</th>
-                    <th>comsumption Amount</th>
-                    <th>Purchase Total</th>
-                    <th>Current billable amount</th>
+                    <td>{{__("Last Billed Amount")}}</td>
+                    <td>{{__("Deposit Amount")}}</td>
+                    <td>{{__("Carryover Amount")}}</td>
+                    <td>{{__("Purchase Amount")}}</td>
+                    <td>{{__("comsumption Amount")}}</td>
+                    <td>{{__("Purchase Total")}}</td>
+                    <td>{{__("Current billable amount")}}</td>
                 </tr>
                 <tr>
                     <td>{{$last_billed_amount??''}}</td>
@@ -98,13 +109,13 @@
             <br><br>
             <table>
                 <tr>
-                    <th>Document Date</th>
-                    <th>Slip No</th>
-                    <th>Product Name</th>
-                    <th>Product Number</th>
-                    <th>Quantity</th>
-                    <th>Unit Price	</th>
-                    <th>Amount</th>
+                    <td>{{__("Document Date")}}</td>
+                    <td>{{__("Slip No")}}</td>
+                    <td>{{__("Product Name")}}</td>
+                    <td>{{__("Product Number")}}</td>
+                    <td>{{__("Quantity")}}</td>
+                    <td>{{__("Unit Price")}}</td>
+                    <td>{{__("Amount")}}</td>
                 </tr>
                 @foreach($invoice_item as $item)
                 <tr>
@@ -118,15 +129,15 @@
                 </tr>
                 @endforeach
                 <tr>
-                    <td colspan="6" style="text-align: right">Sub Total</td>
+                    <td colspan="6" style="text-align: right">{{__("Sub Total")}}</td>
                     <td>{{$data['sub_total']??''}}</td>
                 </tr>
                 <tr>
-                    <td colspan="6" style="text-align: right">{{config('tax.vat')}}% vat</td>
+                    <td colspan="6" style="text-align: right">{{config('tax.vat')}}% {{__("Vat")}}</td>
                     <td>{{$data['taxed_only']??''}}</td>
                 </tr>
                 <tr>
-                    <td colspan="6" style="text-align: right">Grand Total</td>
+                    <td colspan="6" style="text-align: right">{{__("Grand")}} {{__("Total")}}</td>
                     <td>{{$data['taxed_sub_total']??''}}</td>
                 </tr>
             </table>

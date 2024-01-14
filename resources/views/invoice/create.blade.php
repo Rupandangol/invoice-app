@@ -6,80 +6,80 @@
 <body class="bg-light">
     <div class="container">
       <div class="py-5 text-center">
-        <h2>Invoice</h2>
+        <h2>{{__("Invoice")}}</h2>
       </div>
       @include('components.sfAlerts')
-          <h4 class="mb-3">Create Inovice</h4>
+          <h4 class="mb-3">{{__("Create")}} {{__("Inovice")}}</h4>
           <form method="post" action="{{route('invoices.store')}}" >
             @csrf
             <div class="row">
               <div class="col-md-3">
                 <div class="mb-3">
-                  <label for="client_name">Client Name</label>
-                  <input type="text" name="client_name" value="{{old('client_name')??''}}" class="form-control" id="client_name" placeholder="Client Name" >
+                  <label for="client_name">{{__("Client Name")}}</label>
+                  <input type="text" name="client_name" value="{{old('client_name')??''}}" class="form-control" id="client_name" placeholder="{{__("Client Name")}}" >
                 </div>
                 @if($errors->has('client_name'))
                   <div>
-                      <code>{{$errors->first('client_name')}}</code>
+                      <code>{{__($errors->first('client_name'))}}</code>
                   </div>
                 @endif
               </div>
               <div class="col-md-3">
                 <div class="mb-3">
-                  <label for="invoice_date">Invoice Date</label>
+                  <label for="invoice_date">{{__("Invoice Date")}}</label>
                   <input type="date" name="invoice_date" value="{{old('invoice_date')??''}}" class="form-control" id="invoice_date" >
                 </div>
                 @if($errors->has('invoice_date'))
                   <div>
-                      <code>{{$errors->first('invoice_date')}}</code>
+                      <code>{{__($errors->first('invoice_date'))}}</code>
                   </div>
                 @endif
               </div>
               <div class="col-md-3">
                 <div class="mb-3">
-                  <label for="due_date">Due Date</label>
+                  <label for="due_date">{{__("Due Date")}}</label>
                   <input type="date" name="due_date" value="{{old('due_date')??''}}" class="form-control" id="due_date" >
                 </div>
                 @if($errors->has('due_date'))
                   <div>
-                    <code>{{$errors->first('due_date')}}</code>
+                    <code>{{__($errors->first('due_date'))}}</code>
                   </div>
                 @endif
               </div>
               <div class="col-md-3">
                 <div class="mb-3">
-                  <label for="last_billed_amount">Last billed amount</label>
+                  <label for="last_billed_amount">{{__("Last billed Amount")}}</label>
                   <input type="number" name="last_billed_amount" value="{{old('last_billed_amount')??''}}" class="form-control" id="last_billed_amount" >
                 </div>
                 @if($errors->has('last_billed_amount'))
                   <div>
-                    <code>{{$errors->first('last_billed_amount')}}</code>
+                    <code>{{__($errors->first('last_billed_amount'))}}</code>
                   </div>
                 @endif
               </div>
               <div class="col-md-3">
                 <div class="mb-3">
-                  <label for="deposit_amount">Deposit amount</label>
+                  <label for="deposit_amount">{{__("Deposit Amount")}}</label>
                   <input type="number" name="deposit_amount" value="{{old('deposit_amount')??''}}" class="form-control" id="deposit_amount" >
                 </div>
                 @if($errors->has('deposit_amount'))
                   <div>
-                    <code>{{$errors->first('deposit_amount')}}</code>
+                    <code>{{__($errors->first('deposit_amount'))}}</code>
                   </div>
                 @endif
               </div>
               <div class="col-md-3">
                 <div class="mb-3">
-                  <label for="status">Status</label>
+                  <label for="status">{{__("Status")}}</label>
                   <select class="form-select" name="status">
-                    <option @if(old('status')=='draft') selected @endif value="draft">Draft</option>
-                    <option @if(old('status')=='sent') selected @endif value="sent">Sent</option>
-                    <option @if(old('status')=='paid') selected @endif value="paid">Paid</option>
+                    <option @if(old('status')=='draft') selected @endif value="draft">{{__("Draft")}}</option>
+                    <option @if(old('status')=='sent') selected @endif value="sent">{{__("Sent")}}</option>
+                    <option @if(old('status')=='paid') selected @endif value="paid">{{__("Paid")}}</option>
                   </select>
                 </div>
                 @if($errors->has('status'))
                   <div>
-                      <code>{{$errors->first('status')}}</code>
+                      <code>{{__($errors->first('status'))}}</code>
                   </div>
                 @endif
               </div>
@@ -87,12 +87,12 @@
             <hr>
 
             <div class="myBody">
-                <h4>Invoice Items</h4>
+                <h4>{{__("Invoice")}} {{__("Items")}}</h4>
                 @forelse (old('product_name')??[] as $key=>$item)
                     <div class="row appendItem">
                       <div class="col-md-2">
                         <div class="mb-3">
-                          <label>Product Name</label>
+                          <label>{{__("Product Name")}}</label>
                           <input type="text" value="{{old('product_name')[$key]??''}}" name="product_name[]" class="form-control"  >
                         </div>
                         @if($errors->has('product_name.'.$key))
@@ -103,7 +103,7 @@
                       </div>
                       <div class="col-md-2">
                         <div class="mb-3">
-                          <label for="product_number">Product Number</label>
+                          <label for="product_number">{{__("Product Number")}}</label>
                           <input type="number" value="{{old('product_number')[$key]??''}}" name="product_number[]"  class="form-control"  >
                         </div>
                         @if($errors->has('product_number.'.$key))
@@ -114,7 +114,7 @@
                       </div>
                       <div class="col-md-2">
                         <div class="mb-3">
-                          <label for="slip_no">Slip No.</label>
+                          <label for="slip_no">{{__("Slip No")}}.</label>
                           <input type="number" value="{{old('slip_no')[$key]??''}}" name="slip_no[]"  class="form-control"  >
                         </div>
                         @if($errors->has('slip_no.'.$key))
@@ -125,7 +125,7 @@
                       </div>
                       <div class="col-md-2">
                         <div class="mb-3">
-                          <label for="document_date">Document Date</label>
+                          <label for="document_date">{{__("Document Date")}}</label>
                           <input type="date" value="{{old('document_date')[$key]??''}}" name="document_date[]"  class="form-control"  >
                         </div>
                         @if($errors->has('document_date.'.$key))
@@ -136,7 +136,7 @@
                       </div>
                       <div class="col-md-2">
                         <div class="mb-3">
-                          <label for="quantity">Quantity</label>
+                          <label for="quantity">{{__("Quantity")}}</label>
                           <input type="number" value="{{old('quantity')[$key]??''}}" name="quantity[]"  class="form-control"  >
                         </div>
                         @if($errors->has('quantity.'.$key))
@@ -147,7 +147,7 @@
                       </div>
                       <div class="col-md-1">
                         <div class="mb-3">
-                          <label for="unit_price">Unit Price</label>
+                          <label for="unit_price">{{__("Unit Price")}}</label>
                           <input type="number" value="{{old('unit_price')[$key]??''}}" name="unit_price[]"  class="form-control"  >
                         </div>
                         @if($errors->has('unit_price.'.$key))
@@ -158,7 +158,7 @@
                       </div>
                       <div class="col-md-1">
                         <div class="mt-4">
-                            <button type="button" class="btn btn-danger removeItem" >Delete</button>
+                            <button type="button" class="btn btn-danger removeItem" >{{__("Delete")}}</button>
                         </div>
                   </div>  
                  </div>      
@@ -166,52 +166,52 @@
                   <div class="row appendItem">
                     <div class="col-md-2">
                       <div class="mb-3">
-                        <label for="product_name">Product Name</label>
+                        <label for="product_name">{{__("Product Name")}}</label>
                         <input type="text" name="product_name[]" class="form-control"  >
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="mb-3">
-                        <label for="product_number">Product Number</label>
+                        <label for="product_number">{{__("Product Number")}}</label>
                         <input type="number" name="product_number[]"  class="form-control"  >
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="mb-3">
-                        <label for="slip_no">Slip No.</label>
+                        <label for="slip_no">{{__("Slip No")}}.</label>
                         <input type="number" name="slip_no[]"  class="form-control"  >
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="mb-3">
-                        <label for="document_date">Document Date</label>
+                        <label for="document_date">{{__("Document Date")}}</label>
                         <input type="date" name="document_date[]"  class="form-control"  >
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="mb-3">
-                        <label for="quantity">Quantity</label>
+                        <label for="quantity">{{__("Quantity")}}</label>
                         <input type="number" name="quantity[]"  class="form-control"  >
                       </div>
                     </div>
                     <div class="col-md-1">
                       <div class="mb-3">
-                        <label for="unit_price">Unit Price</label>
+                        <label for="unit_price">{{__("Unit Price")}}</label>
                         <input type="number" name="unit_price[]"  class="form-control"  >
                       </div>
                     </div>
                     <div class="col-md-1">
                       <div class="mt-4">
-                          <button type="button" class="btn btn-danger removeItem" >Delete</button>
+                          <button type="button" class="btn btn-danger removeItem" >{{__("Delete")}}</button>
                       </div>
                   </div>  
                 </div>
                 @endforelse
        
         </div>
-            <button class="btn btn-info btn-sm addItem" type="button">+ Add</button><br><br>
-            <button class="btn btn-primary" type="submit">Create</button>
-            <a href="{{route('invoices.index')}}" class="btn btn-info btn-outline">Back</a>
+            <button class="btn btn-info btn-sm addItem" type="button">+ {{__("Add")}}</button><br><br>
+            <button class="btn btn-primary" type="submit">{{__("Create")}}</button>
+            <a href="{{route('invoices.index')}}" class="btn btn-info btn-outline">{{__("Back")}}</a>
 
           </form>
 
@@ -227,43 +227,43 @@
         var appendItem='<div class="row appendItem"> \
                             <div class="col-md-2"> \
                                 <div class="mb-3"> \
-                                    <label >Product Name</label> \
+                                    <label >{{__("Product Name")}}</label> \
                                     <input type="text" name="product_name[]"  class="form-control"> \
                                 </div> \
                             </div> \
                             <div class="col-md-2"> \
                                 <div class="mb-3"> \
-                                    <label >Product Number</label> \
+                                    <label >{{__("Product Number")}}</label> \
                                     <input type="number" name="product_number[]" class="form-control" > \
                                 </div> \
                             </div> \
                             <div class="col-md-2"> \
                                 <div class="mb-3"> \
-                                    <label >Slip No.</label> \
+                                    <label >{{__("Slip No")}}.</label> \
                                     <input type="number" name="slip_no[]"  class="form-control" > \
                                 </div> \
                             </div> \
                             <div class="col-md-2"> \
                                 <div class="mb-3"> \
-                                    <label >Document Date</label> \
+                                    <label >{{__("Document Date")}}</label> \
                                     <input type="date" name="document_date[]"  class="form-control"> \
                                 </div> \
                             </div> \
                             <div class="col-md-2"> \
                                 <div class="mb-3"> \
-                                    <label >Quantity</label> \
+                                    <label >{{__("Quantity")}}</label> \
                                     <input type="number" name="quantity[]"  class="form-control"> \
                                 </div> \
                             </div> \
                             <div class="col-md-1"> \
                                 <div class="mb-3"> \
-                                    <label >Unit Price</label> \
+                                    <label >{{__("Unit Price")}}</label> \
                                     <input type="number" name="unit_price[]" class="form-control" > \
                                 </div> \
                             </div> \
                             <div class="col-md-1"> \
                                 <div class="mt-4"> \
-                                    <button type="button" class="btn btn-danger removeItem" >Delete</button> \
+                                    <button type="button" class="btn btn-danger removeItem" >{{__("Delete")}}</button> \
                                 </div> \
                             </div> \
                         </div>';
