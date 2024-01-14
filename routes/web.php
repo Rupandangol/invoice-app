@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
 
 Route::get('/login',[LoginController::class,'loginForm'])->name('login');
 Route::post('/login',[LoginController::class,'login']);

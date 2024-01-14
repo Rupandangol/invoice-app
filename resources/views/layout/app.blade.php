@@ -6,30 +6,31 @@
               <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
               <span class="fs-4">{{__('Invoice')}} {{__('App')}}</span>
             </a>
+            @include('components.languagesSwitcher')
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
                 <a href="{{route('home')}}" class="nav-link text-white {{$sidebarHome??''}}" aria-current="page">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                  Home
+                  {{__("Home")}}
                 </a>
               </li>
               <li>
                 <a href="{{route('users.index')}}" class="nav-link text-white {{$sidebarUsers??''}}">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                  Users
+                  {{__("Users")}}
                 </a>
               </li>
               <li>
                 <a href="{{route('invoices.index')}}" class="nav-link text-white {{$sidebarInvoices??''}}">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                  Invoice
+                 {{__("Invoice")}}
                 </a>
               </li>
               <li>
                 <a href="{{route('settings.index')}}" class="nav-link text-white {{$sidebarSetting??''}}">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                  Settings
+                  {{__("Setting")}}
                 </a>
               </li>
             </ul>
@@ -40,7 +41,7 @@
                 <strong>{{Auth::user()->name}}</strong>
               </a>
               <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="{{route('logout')}}">Sign out</a></li>
+                <li><a class="dropdown-item" href="{{route('logout')}}">{{__("Sign out")}}</a></li>
               </ul>
             </div>
           </div>

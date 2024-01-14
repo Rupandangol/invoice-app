@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\PdfGeneratorHelper;
 use App\Http\Requests\InvoiceStoreRequest;
 use App\Http\Requests\InvoiceUpdateRequest;
+use App\Models\Company;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use App\Traits\TotalCalculatorTrait;
@@ -84,7 +85,7 @@ class InvoiceController extends Controller
             InvoiceItem::create($dataItem);
         }
 
-        return redirect(route('invoices.show',$invoice->id))->with('success','Invoice Created Successfully');
+        return redirect(route('invoices.show',$invoice->id))->with('success','Invoice Updated Successfully');
         
     }
 
@@ -94,18 +95,14 @@ class InvoiceController extends Controller
     public function destroy(string $id)
     {
         Invoice::findOrFail($id)->delete();
-        return redirect()->back()->with('success','deleted successfully');
+        return redirect()->back()->with('success','Deleted Successfully');
     }
     /**
      * Download Pdf.
      */
     public function download(string $id)
     {
-        $invoice=Invoice::with('invoiceItem')->findOrFail($id);
-        $data['data']=$this->totalCalculator($invoice->invoiceItem);
-        $data['last_billed_amount']=$invoice->last_billed_amount;
-        $data['deposit_amount']=$invoice->last_billed_amount;
-        $data['invoice_item']=$invoice->invoiceItem->toArray();
+        $data=$this->downloadData($id);
         $pdf = Pdf::loadView('pdfTemplate.invoice',$data);
         return $pdf->stream('invoice.pdf');
     }
@@ -137,5 +134,21 @@ class InvoiceController extends Controller
         $dataItem['quantity']=$request->quantity[$key];
         $dataItem['unit_price']=$request->unit_price[$key];
         return $dataItem;
+    }
+
+    /**
+     * Download Data 
+     */
+    protected function downloadData(string $id) : array {
+        $data['company']=Company::all()->first();
+        $invoice=Invoice::with('invoiceItem')->findOrFail($id);
+        $data['data']=$this->totalCalculator($invoice->invoiceItem);
+        $data['last_billed_amount']=$invoice->last_billed_amount;
+        $data['deposit_amount']=$invoice->last_billed_amount;
+        $data['client_name']=$invoice->client_name;
+        $data['invoice_date']=$invoice->invoice_date;
+        $data['due_date']=$invoice->due_date;
+        $data['invoice_item']=$invoice->invoiceItem->toArray();
+        return $data??[];
     }
 }

@@ -4,9 +4,9 @@
 <body class="bg-light">
     <div class="container">
       <div class="py-5 text-center">
-        <h2>Invoice Show</h2>
-        <a class="btn btn-info btn-sm" href="{{route('invoices.index')}}">Back</a>
-        <a target="_blank" class="btn btn-success btn-sm" href="{{route('invoices.download',$invoice->id)}}">Download</a>
+        <h2>{{__("Invoice")}} {{__("Show")}}</h2>
+        <a class="btn btn-info btn-sm" href="{{route('invoices.index')}}">{{__("Back")}}</a>
+        <a target="_blank" class="btn btn-success btn-sm" href="{{route('invoices.download',$invoice->id)}}">{{__("Download")}}</a>
       </div>
       @include('components.sfAlerts')
 
@@ -15,12 +15,12 @@
           <table class="table table-boarded">
             <thead>
               <tr>
-                <th>Last Billed Amount</th>
-                <th>Deposit Amount</th>
-                <th>Carryover Amount</th>
-                <th>Purchase Amount</th>
-                <th>comsumption Amount</th>
-                <th>Purchase Total</th>
+                <th>{{__("Last Billed Amount")}}</th>
+                <th>{{__("Deposit Amount")}}</th>
+                <th>{{__("Carryover Amount")}}</th>
+                <th>{{__("Purchase Amount")}}</th>
+                <th>{{__("comsumption Amount")}}</th>
+                <th>{{__("Purchase Total")}}</th>
               </tr>
             </thead>
             <tbody>
@@ -39,7 +39,7 @@
           <table class="table table-boarded">
             <thead>
               <tr>
-                <th>Current billable amount</th>
+                <th>{{__("Current billable amount")}}</th>
               </tr>
               <tr>
                 <td>{{$invoice->data['taxed_sub_total']+($invoice->last_billed_amount-$invoice->deposit_amount)}}</td>
@@ -53,14 +53,14 @@
         <table class="table table-boarded">
             <thead>
               <tr>
-                <th>Sn</th>
-                <th>Document Date</th>
-                <th>Slip No</th>
-                <th>Product Name</th>
-                <th>Product Number</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Amount</th>
+                <th>{{__("Id")}}</th>
+                <th>{{__("Document Date")}}</th>
+                <th>{{__("Slip No")}}</th>
+                <th>{{__("Product Name")}}</th>
+                <th>{{__("Product Number")}}</th>
+                <th>{{__("Quantity")}}</th>
+                <th>{{__("Unit Price")}}</th>
+                <th>{{__("Amount")}}</th>
               </tr>            
             </thead>
             <tbody>
@@ -77,17 +77,17 @@
               </tr>
               @endforeach
               <tr>
-                <td colspan="7" align="right">sub-total :</td>
+                <td colspan="7" align="right">{{__("sub-total")}} :</td>
                 <td>{{$invoice->data['sub_total']}}</td>
               </tr>
               <hr>
               <tr>
                 
-                <td colspan="7" align="right">{{config('tax.vat')}} % Vat :</td>
+                <td colspan="7" align="right">{{config('tax.vat')}} % {{__("Vat")}} :</td>
                 <td>{{$invoice->data['taxed_only']}}</td>
               </tr>
               <tr>
-                <td colspan="7" align="right">total : </td>
+                <td colspan="7" align="right">{{__("Total")}} : </td>
                 <td>{{$invoice->data['taxed_sub_total']}}</td>
               </tr>
             </tbody>
