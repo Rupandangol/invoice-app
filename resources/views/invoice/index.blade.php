@@ -30,15 +30,9 @@
                 <td>{{$item->invoice_date}}</td>
                 <td>{{$item->due_date}}</td>
                 <td>
-                  <form action="">
-                    @csrf
-                    @method('PATCH')
-                    <select class="form-select" name="status">
-                      <option @if($item->status=='draft') selected @endif value="draft">{{__("Draft")}}</option>
-                      <option @if($item->status=='sent') selected @endif value="sent">{{__("Sent")}}</option>
-                      <option @if($item->status=='paid') selected @endif value="paid">{{__("Paid")}}</option>
-                    </select>
-                  </form>
+                      @if($item->status=='draft') <span>{{__("Draft")}}</span> @endif 
+                      @if($item->status=='sent') <span>{{__("Sent")}}</span> @endif 
+                     @if($item->status=='paid') <span>{{__("Paid")}}</span> @endif 
                 </td>
 
                 <td>
@@ -48,6 +42,9 @@
                     </div>
                     <div class="col-md-2">
                        <a href="{{route('invoices.edit',$item->id)}}" class="btn btn-warning btn-sm">{{__("Edit")}}</a>
+                    </div>
+                    <div class="col-md-3">
+                       <a href="{{route('invoices.download',$item->id)}}" target="_blank" class="btn btn-success btn-sm">{{__("Download")}}</a>
                     </div>
                     <div class="col-md-2">
                       <form method="post" action="{{route('invoices.destroy',$item->id)}}">

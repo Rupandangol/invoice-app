@@ -6,6 +6,7 @@
       <div class="py-5 text-center">
         <h2>{{__("Invoice")}} {{__("Show")}}</h2>
         <a class="btn btn-info btn-sm" href="{{route('invoices.index')}}">{{__("Back")}}</a>
+        <a target="_blank" class="btn btn-primary btn-sm" href="{{route('invoices.stream',$invoice->id)}}">{{__("Stream")}}</a>
         <a target="_blank" class="btn btn-success btn-sm" href="{{route('invoices.download',$invoice->id)}}">{{__("Download")}}</a>
       </div>
       @include('components.sfAlerts')

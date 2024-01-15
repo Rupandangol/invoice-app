@@ -104,6 +104,15 @@ class InvoiceController extends Controller
     {
         $data=$this->downloadData($id);
         $pdf = Pdf::loadView('pdfTemplate.invoice',$data);
+        return $pdf->download('invoice.pdf');
+    }
+    /**
+     * Stream Pdf.
+     */
+    public function stream(string $id)
+    {
+        $data=$this->downloadData($id);
+        $pdf = Pdf::loadView('pdfTemplate.invoice',$data);
         return $pdf->stream('invoice.pdf');
     }
 

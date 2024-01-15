@@ -17,12 +17,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('language/{locale}', function ($locale) {
-    app()->setLocale($locale);
-    session()->put('locale', $locale);
-    return redirect()->back();
-});
-
 Route::get('/login',[LoginController::class,'loginForm'])->name('login');
 Route::post('/login',[LoginController::class,'login']);
 
@@ -35,6 +29,17 @@ Route::group(['middleware'=>'auth'],function(){
     Route::resource('/users',UserController::class);
     Route::resource('/invoices',InvoiceController::class);
     Route::get('/invoices/download/{id}',[InvoiceController::class,'download'])->name('invoices.download');
+    Route::get('/invoices/stream/{id}',[InvoiceController::class,'stream'])->name('invoices.stream');
     Route::resource('/settings',SettingController::class);
 });
+Route::get('language/{locale}', function ($locale) {
+    $previousUrl = url()->previous();
+    
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+
+    // Redirect to the previous URL if available; otherwise, redirect to the root
+    return redirect($previousUrl ?: '/');
+})->name('lang.switcher');
+
 
