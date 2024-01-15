@@ -3,8 +3,10 @@
         @if($available_locale === $current_locale)
                 <button type="button" class="btn btn-success btn-sm">{{ $available_locale }}</button>
         @else
-            <a class="btn btn-outline-success btn-sm" href="language/{{ $available_locale }}">
+            <a class="btn btn-outline-success btn-sm" href="{{route('lang.switcher',$available_locale)}}">
                 {{ $available_locale }}
+            {{-- </a>      <a class="btn btn-outline-success btn-sm" href="language/{{ $available_locale }}">
+                {{ $available_locale }} --}}
             </a>       
         @endif
              
